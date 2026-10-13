@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import './App.css'
 import { categories as exerciseCategories } from './exercises'
@@ -30,35 +31,40 @@ function App() {
   return (
     <div className="app">
       <header className="header">
-        {(selectedCategory || selectedSubcategory) && (
-          <button className="back-button" onClick={goBack}>
-            ← Volver
-          </button>
-        )}
+        <div className="header-left">
+          {(selectedCategory || selectedSubcategory) && (
+            <button className="back-button" onClick={goBack}>
+              ← Volver
+            </button>
+          )}
 
-        <div className="brand">
-          <div className="brand-main">
-            <span>ZONA</span>
-            <strong>ZERO</strong>
-          </div>
-
-          <div className="brand-subtitle">
-            <span>Entrenamiento</span>
-            <span className="brand-functional">
-              <b>F</b>unciona<b>L</b>
-            </span>
-          </div>
+          <a
+            className="brand"
+            href="#inicio"
+            onClick={(event) => {
+              event.preventDefault()
+              setSelectedCategory(null)
+              setSelectedSubcategory(null)
+            }}
+            aria-label="Zona Zero, volver al inicio"
+          >
+            <img
+              className="brand-logo"
+              src="/logo-zona-zero.png"
+              alt="Zona Zero — Entrenamiento Funcional"
+            />
+          </a>
         </div>
 
-        {!selectedCategory && (
-          <p className="subtitle">ENTRENAMIENTO FUNCIONAL</p>
-        )}
+        <p className="subtitle">ENTRENAMIENTO FUNCIONAL</p>
       </header>
 
       {!selectedCategory && (
-        <main className="home">
+        <main className="home" id="inicio">
           <section className="hero">
-            <p className="eyebrow">ZONA ZERO · ENTRENAMIENTO FUNCIONAL</p>
+            <p className="eyebrow">
+              ZONA ZERO · ENTRENAMIENTO FUNCIONAL
+            </p>
 
             <h1>
               Entrena.
@@ -67,11 +73,11 @@ function App() {
             </h1>
 
             <p className="hero-text">
-              Tu biblioteca de ejercicios para mejorar fuerza, movilidad,
-              rendimiento y salud.
+              Tu biblioteca de ejercicios para mejorar fuerza,
+              movilidad, rendimiento y salud.
             </p>
 
-            <div className="brand-mark">
+            <div className="brand-mark" aria-hidden="true">
               <span>ZZ</span>
             </div>
           </section>
@@ -99,9 +105,13 @@ function App() {
                     {String(index + 1).padStart(2, '0')}
                   </span>
 
-                  <span className="category-name">{category.name}</span>
+                  <span className="category-name">
+                    {category.name}
+                  </span>
 
-                  <span className="arrow">↗</span>
+                  <span className="arrow" aria-hidden="true">
+                    ↗
+                  </span>
                 </button>
               ))}
             </div>
@@ -125,25 +135,29 @@ function App() {
               </div>
 
               <div className="category-grid">
-                {currentCategory.subcategories.map((subcategory, index) => (
-                  <button
-                    className="category-card"
-                    key={subcategory.name}
-                    onClick={() =>
-                      setSelectedSubcategory(subcategory.name)
-                    }
-                  >
-                    <span className="number">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                {currentCategory.subcategories.map(
+                  (subcategory, index) => (
+                    <button
+                      className="category-card"
+                      key={subcategory.name}
+                      onClick={() =>
+                        setSelectedSubcategory(subcategory.name)
+                      }
+                    >
+                      <span className="number">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
 
-                    <span className="category-name">
-                      {subcategory.name}
-                    </span>
+                      <span className="category-name">
+                        {subcategory.name}
+                      </span>
 
-                    <span className="arrow">↗</span>
-                  </button>
-                ))}
+                      <span className="arrow" aria-hidden="true">
+                        ↗
+                      </span>
+                    </button>
+                  )
+                )}
               </div>
             </section>
           )}
@@ -199,19 +213,30 @@ function App() {
               </span>
             </div>
 
-            <div className="category-grid">
-              {exercises.map((exercise, index) => (
-                <div className="category-card" key={exercise.name}>
-                  <span className="number">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
+            {exercises.length > 0 ? (
+              <div className="category-grid">
+                {exercises.map((exercise, index) => (
+                  <div className="category-card" key={exercise.name}>
+                    <span className="number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
 
-                  <span className="category-name">
-                    {exercise.name}
-                  </span>
-                </div>
-              ))}
-            </div>
+                    <span className="category-name">
+                      {exercise.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <div className="empty-icon">ZONA ZERO</div>
+                <h2>Próximamente</h2>
+                <p>
+                  Estamos preparando los ejercicios de esta
+                  subcategoría.
+                </p>
+              </div>
+            )}
           </section>
         </main>
       )}

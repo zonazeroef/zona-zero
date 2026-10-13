@@ -1,0 +1,23 @@
+
+{
+  "name": "Zona Zero | Entrenamiento Funcional",
+  "short_name": "Zona Zero",
+  "description": "Entrenamiento funcional y rendimiento",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#808080",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
