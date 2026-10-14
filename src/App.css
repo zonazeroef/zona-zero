@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -8,6 +9,8 @@
   background: #f5f5f3;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -16,8 +19,13 @@ body {
   background: #f5f5f3;
 }
 
-button {
+button,
+a {
   font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app {
@@ -25,9 +33,7 @@ button {
   background: #f5f5f3;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 .header {
   position: sticky;
@@ -44,48 +50,29 @@ button {
   backdrop-filter: blur(12px);
 }
 
-/* LOGO */
-
-.brand {
+.header-left {
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 24px;
+  min-width: 0;
 }
 
-.brand-main {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
-  line-height: 0.9;
-  letter-spacing: -2px;
+/* LOGO OFICIAL */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
 }
 
-.brand-main span {
-  font-size: 27px;
-  font-weight: 300;
-}
-
-.brand-main strong {
-  font-size: 29px;
-  font-weight: 950;
-}
-
-.brand-subtitle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 13px;
-  border-left: 2px solid #111111;
-  font-size: 7px;
-  font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-
-.brand-functional b {
-  font-size: 9px;
-  font-weight: 950;
+.brand-logo {
+  display: block;
+  width: 225px;
+  max-width: 100%;
+  max-height: 68px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .subtitle {
@@ -94,6 +81,7 @@ button {
   font-weight: 800;
   letter-spacing: 2.5px;
   color: #555555;
+  text-align: right;
 }
 
 /* BACK BUTTON */
@@ -106,16 +94,15 @@ button {
   cursor: pointer;
   font-size: 13px;
   font-weight: 700;
-  transition: 0.2s ease;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
 }
 
 .back-button:hover {
   opacity: 0.5;
 }
 
-/* =========================
-   HOME
-========================= */
+/* HOME */
 
 .home {
   width: min(1280px, 90%);
@@ -126,7 +113,7 @@ button {
 
 .hero {
   position: relative;
-  padding: 100px 0 100px;
+  padding: 100px 0;
   border-bottom: 1px solid #deded9;
   overflow: hidden;
 }
@@ -181,7 +168,7 @@ button {
   color: #555555;
 }
 
-/* MARCA ZZ */
+/* EMBLEMA DECORATIVO */
 
 .brand-mark {
   position: absolute;
@@ -214,9 +201,7 @@ button {
   transform: translateX(-2px);
 }
 
-/* =========================
-   CATEGORIES
-========================= */
+/* CATEGORIES */
 
 .categories {
   padding: 75px 0 100px;
@@ -244,18 +229,17 @@ button {
   white-space: nowrap;
 }
 
-/* GRID */
+/* CATEGORY GRID */
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
-/* CATEGORY CARD */
-
 .category-card {
   position: relative;
+  min-width: 0;
   min-height: 175px;
   padding: 24px;
   display: flex;
@@ -274,7 +258,7 @@ button {
     border-color 0.25s ease;
 }
 
-.category-card:hover {
+button.category-card:hover {
   background: #111111;
   color: #ffffff;
   border-color: #111111;
@@ -289,7 +273,7 @@ button {
   color: #8a8a86;
 }
 
-.category-card:hover .number {
+button.category-card:hover .number {
   color: #aaaaaa;
 }
 
@@ -301,6 +285,7 @@ button {
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.5px;
+  overflow-wrap: anywhere;
 }
 
 .arrow {
@@ -312,13 +297,11 @@ button {
   transition: transform 0.25s ease;
 }
 
-.category-card:hover .arrow {
+button.category-card:hover .arrow {
   transform: translate(4px, -4px);
 }
 
-/* =========================
-   CATEGORY PAGE
-========================= */
+/* CATEGORY PAGE */
 
 .category-page {
   width: min(1280px, 90%);
@@ -334,6 +317,7 @@ button {
   letter-spacing: -6px;
   font-weight: 950;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .category-page .categories {
@@ -341,9 +325,7 @@ button {
   margin-bottom: 70px;
 }
 
-/* =========================
-   EMPTY STATE
-========================= */
+/* EMPTY STATE */
 
 .empty-state {
   margin-top: 50px;
@@ -372,13 +354,11 @@ button {
   line-height: 1.5;
 }
 
-/* =========================
-   TABLET
-========================= */
+/* TABLET */
 
 @media (max-width: 950px) {
   .category-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hero {
@@ -394,42 +374,28 @@ button {
     width: 105px;
     height: 105px;
   }
+
+  .brand-logo {
+    width: 200px;
+  }
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media (max-width: 650px) {
   .header {
     min-height: 70px;
     padding: 7px 5%;
+    gap: 10px;
   }
 
-  .brand {
-    gap: 9px;
+  .header-left {
+    gap: 12px;
   }
 
-  .brand-main {
-    gap: 3px;
-  }
-
-  .brand-main span {
-    font-size: 21px;
-  }
-
-  .brand-main strong {
-    font-size: 23px;
-  }
-
-  .brand-subtitle {
-    padding-left: 9px;
-    font-size: 6px;
-    letter-spacing: 0.8px;
-  }
-
-  .brand-functional b {
-    font-size: 7px;
+  .brand-logo {
+    width: 165px;
+    max-height: 52px;
   }
 
   .subtitle {
@@ -442,7 +408,7 @@ button {
   }
 
   .hero {
-    padding: 65px 0 65px;
+    padding: 65px 0;
   }
 
   .hero::after {
@@ -453,7 +419,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 57px;
+    font-size: clamp(43px, 10vw, 57px);
     letter-spacing: -3.5px;
   }
 
@@ -516,7 +482,27 @@ button {
 
   .category-page h1 {
     margin-bottom: 50px;
-    font-size: 52px;
+    font-size: clamp(36px, 10vw, 52px);
     letter-spacing: -3px;
+  }
+
+  .category-page .categories {
+    margin-bottom: 50px;
+  }
+
+  .empty-state {
+    padding: 55px 20px;
+  }
+}
+
+/* REDUCIR ANIMACIONES SI EL USUARIO LO PREFIERE */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }
